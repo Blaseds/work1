@@ -1,0 +1,68 @@
+#include <iostream>
+using namespace std;
+
+void fillArray(int *const ary, const int size){
+    
+    for (int i=0;i<size;i++) {
+        ary[i]=rand()%10;
+    }
+    
+}
+
+void printArray(const int * const ary,const int size){
+    for(int i=0;i<size;i++){
+    cout<<ary[i]<<"\t";
+    }
+    cout<<endl<<"//////////////////////////////"<<endl;
+    
+}
+
+void push_back(int *&ar, int &size){
+    int *ar1= new int[size--];
+    for(int i=0;i<size;i++){
+        ar1[i]=ar[i+1];
+    }
+    delete [] ar;
+    ar=ar1;
+    
+}
+
+void push_back2(int *&ar, int &size, int &num)
+{
+    int *ar1 = new int[size--];
+    num--;
+    for(int i=0,l=0;i<size;i++,l++)
+    {
+        if (i==num)
+        {
+            ar1[i]=ar[l++];
+        }
+        else    
+            { 
+                ar1[i]=ar[l];
+            }
+    }
+
+    delete []ar;
+    ar=ar1;
+}
+
+int main(){
+    int size,num;
+    setlocale(LC_ALL,"Rus");
+    cout<<"Введите число элементов массива";
+    cin>>size;
+    cout<<"Введите вытесняемый элемент";
+    cin>>num;
+    
+    int *ar=new int[size];
+    fillArray(ar,size);
+    printArray(ar,size);
+    //push_back(ar,size);
+
+    push_back2(ar,size,num);
+    printArray(ar,size);
+     
+    delete[] ar;
+    return 0;
+}
